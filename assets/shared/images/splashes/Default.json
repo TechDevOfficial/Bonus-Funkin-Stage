@@ -1,0 +1,8 @@
+{
+    "name": "Default",
+    "fps": 26,
+    "minFps": 24,
+    "maxFps": 28,
+    "xOffset": -30,
+    "yOffset": -15
+}
