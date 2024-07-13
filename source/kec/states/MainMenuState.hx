@@ -1,18 +1,18 @@
 package kec.states;
 
-import kec.backend.Controls.KeyboardScheme;
-#if FEATURE_DISCORD
-import kec.backend.Discord;
-#end
+import flixel.addons.display.FlxBackdrop;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
+import kec.backend.Controls.KeyboardScheme;
+import kec.backend.chart.Song;
 import lime.app.Application;
-import flixel.addons.display.FlxBackdrop;
+#if FEATURE_DISCORD
+import kec.backend.Discord;
+#end
 #if FEATURE_MODCORE
 import polymod.Polymod;
 #end
-import kec.backend.chart.Song;
 
 class MainMenuState extends MusicBeatState
 {
@@ -173,15 +173,8 @@ class MainMenuState extends MusicBeatState
 		logo = new FlxSprite(900, 0);
 		if (Main.watermarks)
 		{
-			logo.frames = Paths.getSparrowAtlas("KECLogoOrange");
-			logo.scale.set(0.7, 0.7);
-		}
-		else
-		{
-			logo.frames = Paths.getSparrowAtlas("KadeEngineLogoBumpin");
-			logo.x = 800;
-			logo.y = -60;
-			logo.scale.set(0.55, 0.55);
+			logo.frames = Paths.getSparrowAtlas("newlogowth");
+			logo.scale.set(0.5, 0.5);
 		}
 		logo.animation.addByPrefix("bump", "logo bumpin", 24);
 		logo.antialiasing = FlxG.save.data.antialiasing;
