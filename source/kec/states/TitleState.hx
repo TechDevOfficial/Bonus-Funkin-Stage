@@ -1,17 +1,17 @@
 package kec.states;
 
+import lime.app.Application;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
-import flixel.group.FlxGroup;
-import kec.objects.Alphabet;
-import lime.app.Application;
-import openfl.Assets;
 #if FEATURE_DISCORD
 import kec.backend.Discord;
 #end
+import openfl.Assets;
+import flixel.group.FlxGroup;
 #if cpp
 import cpp.vm.Gc;
 #end
+import kec.objects.Alphabet;
 
 class TitleState extends MusicBeatState
 {
@@ -84,10 +84,17 @@ class TitleState extends MusicBeatState
 		bg.antialiasing = FlxG.save.data.antialiasing;
 		add(bg);
 
-		logoBl = new FlxSprite(-150,);
-		logoBl.frames = Paths.getSparrowAtlas('newlogowth');
-		logoBl.x += 195;
-		logoBl.scale.set(0.8, 0.8);
+		logoBl = new FlxSprite(-150, -1000);
+		if (Main.watermarks)
+		{
+			logoBl.frames = Paths.getSparrowAtlas('KECLogoOrange');
+			logoBl.x += 125;
+			logoBl.scale.set(1.2, 1.2);
+		}
+		else
+		{
+			logoBl.frames = Paths.getSparrowAtlas('KadeEngineLogoBumpin');
+		}
 		logoBl.antialiasing = FlxG.save.data.antialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.updateHitbox();
@@ -368,7 +375,12 @@ class TitleState extends MusicBeatState
 
 			FlxG.camera.flash(FlxColor.WHITE, 4);
 			remove(credGroup);
-			FlxTween.tween(logoBl, {y: 75}, 1.4, {ease: FlxEase.expoInOut});
+			if (!Main.watermarks)
+				FlxTween.tween(logoBl, {y: -100}, 1.4, {ease: FlxEase.expoInOut});
+			else
+				FlxTween.tween(logoBl, {y: -30}, 1.4, {ease: FlxEase.expoInOut});
+			FlxTween.tween(gfDance, {x: FlxG.width * 0.4}, 1.4, {ease: FlxEase.expoInOut});
+
 			logoBl.angle = -4;
 
 			new FlxTimer().start(0.01, function(tmr:FlxTimer)
